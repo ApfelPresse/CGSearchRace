@@ -11,7 +11,7 @@ class Unit(Point):
         super().__init__(x, y)
         self.vx = 0.0
         self.vy = 0.0
-        self.friction = 0.5
+        self.friction = Constants.CAR_FRICTION
 
     def get_speed(self):
         return sqrt(self.vx * self.vx + self.vy * self.vy)
