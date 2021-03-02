@@ -14,14 +14,11 @@ class Car(Unit):
         self.thrust = 0
         self.prev_angle = 0
         self.target = None
-        self.message = ""
         self.debug = False
 
     def handle_input_(self, user_input):
         self.prev_angle = self.angle
         self.target = None
-        self.message = ""
-        # self.car = self
         split = user_input.split(" ")
 
         if split[0] == "EXPERT":
@@ -88,12 +85,8 @@ class Car(Unit):
 
     def adjust(self):
         super().adjust()
-        degrees_ = round(degrees(self.angle))
-        self.angle = radians(degrees_)
-        while self.angle > Constants.PI * 2:
-            self.angle -= Constants.PI * 2
-        while self.angle < 0:
-            self.angle += Constants.PI * 2
+        self.angle = radians(round(degrees(self.angle)))
+        self.angle = self.angle % (Constants.PI * 2)
 
     def short_angle_dist(self, a0: float, a1: float):
         max_angle = Constants.PI * 2
